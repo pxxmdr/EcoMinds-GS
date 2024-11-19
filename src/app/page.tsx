@@ -1,3 +1,10 @@
-export default function Home() {
-  return <h1>Home</h1>;
+import { LoginForm } from "@/components/LoginForm";
+import loginPageStyles from "../styles/authStyle.module.css";
+
+export default function LoginPage() {
+  return (
+    <main className={loginPageStyles.LoginWrapper}>
+      <LoginForm />
+    </main>
+  );
 }

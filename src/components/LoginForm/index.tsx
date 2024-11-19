@@ -1,7 +1,7 @@
 "use client"
-import { FaArrowLeftLong } from "react-icons/fa6";
 import Image from "next/image";
-import styles from "./style.module.css"
+import { FaArrowLeftLong } from "react-icons/fa6";
+import styles from "./style.module.css";
 
 export const LoginForm = () => {
   return (
@@ -16,18 +16,17 @@ export const LoginForm = () => {
           </label>
           <input type="text" id="cnpj" placeholder="Insira aqui" />
         </div>
-        <div className={styles.field} style={{marginTop: "1rem"}}>
+        <div className={styles.field} style={{ marginTop: "1rem" }}>
           <label htmlFor="senha">
             {" "}
             <FaArrowLeftLong /> Senha
           </label>
-          <input type="text" id="senha" placeholder="Insira aqui" />
+          <input type="password" id="senha" placeholder="Insira aqui" />
         </div>
-        <a href="/">
+        <a href="/s">
           <button>Entrar</button>
         </a>
       </div>
-      <Image src={"/EcoMindsLogo.png"} height={220} width={220} alt="Logo da ecominds com plantas de cores verdes e sustentavel" style={{marginInline: "auto"}}/>
     </div>
   );
 };

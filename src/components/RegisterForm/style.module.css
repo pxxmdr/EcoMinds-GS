@@ -1,4 +1,4 @@
-.LoginFormContainer {
+.RegisterFormContainer {
   display: flex;
   flex-direction: column;
   
@@ -18,30 +18,30 @@
 }
 
 @media (max-width: 736px) {
-  .LoginFormContainer {
+  .RegisterFormContainer {
     margin-inline: 1.125rem;
   }
 }
 
 @media (max-width: 425px) {
-  .LoginFormContainer {
+  .RegisterFormContainer {
     border: none;
     padding-inline: 0;
   }
 }
 
-.LoginFormContainer h1 {
+.RegisterFormContainer h1 {
   margin-bottom: 16px;
   color: #000000;
   font-size: 24px;
 }
-.LoginFormContainer p {
+.RegisterFormContainer p {
   font-size: 14px;
   color: #404040;
   margin-bottom: 16px;
 }
 
-.LoginFormContainer label {
+.RegisterFormContainer label {
   font-size: 14px;
 }
 
