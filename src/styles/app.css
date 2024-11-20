@@ -3,7 +3,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: rgb(0, 0, 0);
+  gap: 1rem;
+  color: #fff;
+  width: 70%;
+  margin-top: 4rem;
+  
 }
 
 main {

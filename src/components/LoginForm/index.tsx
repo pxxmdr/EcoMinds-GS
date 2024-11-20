@@ -27,6 +27,9 @@ export const LoginForm = () => {
           <button>Entrar</button>
         </a>
       </div>
+      <a href="/register">
+          <button style={{color: "green"}}><u>Cadastre-se agora, caso não tenha Login!</u></button>
+        </a>
     </div>
   );
 };
