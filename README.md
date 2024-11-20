@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Equipe EcoMinds
+Nome: Adonay Rodrigues da Rocha - RM558782
+Nome: Marina Yumi Kanadani - RM558404
+Nome: Pedro Henrique Martins dos Reis - RM555306
+
 ## Getting Started
 
 First, run the development server:
