@@ -1,61 +1,75 @@
-import { Post, CompanyProps } from "../Post";
+"use client";
+
+import { useEffect, useState } from "react";
+import { Post } from "../Post";
 import postsStyles from "./style.module.css";
 
-
-// Dados para teste, quando for integrar com a API substitua isso pelo que vem do fetch
-// Adapte os nomes e dados que você precisar com base no que está sendo repassado pela api
-const mockedData: CompanyProps[] = [
-  {
-    id: 1,
-    title: "First Post",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reiciendis debitis voluptatum!",
-    img_src: "/backgroundHomeGreen.jpg",
-    qtd_comments: 30,
-    qtd_views: 135,
-  },
-  {
-    id: 2,
-    title: "Second Post",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reiciendis debitis voluptatum!",
-    img_src: "/backgroundHomeSol.png",
-    qtd_comments: 3,
-    qtd_views: 48,
-  },
-  {
-    id: 3,
-    title: "Third Post",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reiciendis debitis voluptatum!",
-    img_src: "/backgroundHomeGreen.jpg",
-    qtd_comments: 23,
-    qtd_views: 64,
-  },
-  {
-    id: 4,
-    title: "Fourth Post",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati reiciendis debitis voluptatum!",
-    img_src: "/backgroundHomeSol.png",
-    qtd_comments: 27,
-    qtd_views: 54,
-  },
-];
+export interface EmpresaProps {
+  id: number;
+  title: string;
+  description: string;
+  img_src: string;
+  qtd_comments: number;
+  qtd_views: number;
+}
 
 export const Posts = () => {
+  const [empresas, setEmpresas] = useState<EmpresaProps[]>([]);
+
+  // Função para buscar dados da API
+  const fetchEmpresas = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/solara-java/rest/empresas");
+      if (!response.ok) throw new Error(`Erro: ${response.status}`);
+      
+      // Obter dados da API
+      const data = await response.json();
+
+      // Mapeando dados para corresponder aos campos esperados pelo componente Post
+      const mappedData = data.map((empresa: any) => ({
+        id: empresa.idEmpresa,
+        title: empresa.razaoSocialEmpresa,
+        description: empresa.descricaoEmpresa,
+        img_src: empresa.imagemEmpresa.includes("drive.google.com")
+          ? `https://drive.google.com/uc?id=${empresa.imagemEmpresa.split("/d/")[1].split("/view")[0]}`
+          : empresa.imagemEmpresa,
+        qtd_comments: 0,
+        qtd_views: 0,
+      }));
+
+      setEmpresas(mappedData);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    }
+  };
+
+  // Carregar dados ao montar o componente
+  useEffect(() => {
+    fetchEmpresas();
+  }, []);
+
   return (
     <div className={postsStyles.Posts}>
-      {mockedData.map((post) => (
-        <Post
-          key={`${post.title}-${post.id}`}
-          title={post.title}
-          description={post.description}
-          img_src={post.img_src}
-          qtd_comments={post.qtd_comments}
-          qtd_views={post.qtd_views}
-        />
-      ))}
+      <div className={postsStyles.Aviso}>
+        <p>
+          <strong>Aviso:</strong> Os dados apresentados nesta página são para fins acadêmicos e foram obtidos de fontes públicas, não representando parcerias reais com as empresas mencionadas.
+        </p>
+      </div>
+
+      {empresas.length > 0 ? (
+        empresas.map((empresa) => (
+          <Post
+            key={empresa.id}
+            title={empresa.title}
+            description={empresa.description}
+            img_src={empresa.img_src}
+            qtd_comments={empresa.qtd_comments}
+            qtd_views={empresa.qtd_views}
+          />
+        ))
+      ) : (
+        <p>Carregando dados...</p>
+      )}
     </div>
   );
 };
